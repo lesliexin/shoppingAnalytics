@@ -12,14 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Spinner spinner;
+    TextView retailer1;
     private static final String[] options = new String[]{"Clothing", "Food", "Dining", "Entertainment", "Other"};
+    String[] text0 = { "Sunday", "Monday", "Tuesday",
+            "Wednesday", "Thursday", "Friday", "Saturday" };
+    Spinner spinner0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +53,53 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         spinner = (Spinner)findViewById(R.id.spinner);
+        retailer1 = (TextView)findViewById(R.id.textView8);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_spinner_item,options);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(onItemSelectedListener);
 
     }
+
+    AdapterView.OnItemSelectedListener onItemSelectedListener =
+            new AdapterView.OnItemSelectedListener(){
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view,
+                                           int position, long id) {
+
+                    String text = spinner.getSelectedItem().toString();
+
+                    if (text.equalsIgnoreCase("Clothing")) {
+                        retailer1.setText("Clothes");
+                    }
+                    else if (text.equalsIgnoreCase("Food")){
+                        retailer1.setText("FUUUUD");
+                    }
+                    else if (text.equalsIgnoreCase("Food")){
+                        retailer1.setText("FUUUUD");
+                    }
+                    else if (text.equalsIgnoreCase("Food")){
+                        retailer1.setText("FUUUUD");
+                    }
+                    else{
+                        retailer1.setText("FUUUUD");
+                    }
+
+
+
+
+
+
+
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            };
 
     @Override
     public void onBackPressed() {
