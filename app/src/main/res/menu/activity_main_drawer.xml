@@ -9,24 +9,24 @@
             android:title="My Accounts" />
         <item
             android:id="@+id/nav_gallery"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
             android:title="Spendalytics" />
         <item
             android:id="@+id/nav_slideshow"
+            android:icon="@android:drawable/ic_menu_recent_history"
             android:title="Bill Payments" />
         <item
             android:id="@+id/nav_manage"
+            android:icon="@android:drawable/ic_menu_set_as"
             android:title="Interact E-Transfers" />
+        <item
+            android:id="@+id/transfer"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="Transfer Funds" />
+        <item
+            android:id="@+id/trans"
+            android:icon="@android:drawable/ic_menu_upload"
+            android:title="Upcoming Transactions" />
     </group>
-
-    <item>
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:title="Stocks?" />
-        </menu>
-    </item>
 
 </menu>

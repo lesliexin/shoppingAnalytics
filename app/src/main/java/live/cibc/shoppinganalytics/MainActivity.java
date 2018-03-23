@@ -17,15 +17,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import live.cibc.shoppinganalytics.recommender.API;
+import live.cibc.shoppinganalytics.recommender.Recommendation;
+import live.cibc.shoppinganalytics.recommender.SavingsDisplayObject;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Spinner spinner;
-    TextView retailer1;
+    private Spinner futureTime;
+    TextView retailer1, sale1, confidence1, weeks1;
+    TextView retailer2, sale2, confidence2, weeks2;
+    TextView retailer3, sale3, confidence3, weeks3;
     private static final String[] options = new String[]{"Clothing", "Food", "Dining", "Entertainment", "Other"};
-    String[] text0 = { "Sunday", "Monday", "Tuesday",
-            "Wednesday", "Thursday", "Friday", "Saturday" };
-    Spinner spinner0;
+    private static final String[] times = new String[]{"2 Weeks","4 Weeks", "6 Weeks", "8 Weeks"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +40,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,12 +51,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         spinner = (Spinner)findViewById(R.id.spinner);
-        retailer1 = (TextView)findViewById(R.id.textView8);
+        futureTime = (Spinner)findViewById(R.id.time);
+
+        retailer1 = (TextView)findViewById(R.id.retailer1);
+        confidence1 = (TextView)findViewById(R.id.confidence1);
+        sale1 = (TextView)findViewById(R.id.sale1);
+        weeks1 = (TextView)findViewById(R.id.weeks1);
+
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_spinner_item,options);
+        ArrayAdapter<String>adapter2 = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_spinner_item,times);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        futureTime.setAdapter(adapter2);
         spinner.setOnItemSelectedListener(onItemSelectedListener);
 
     }
@@ -71,29 +78,66 @@ public class MainActivity extends AppCompatActivity
                                            int position, long id) {
 
                     String text = spinner.getSelectedItem().toString();
+                    String text2 = futureTime.getSelectedItem().toString();
 
-                    if (text.equalsIgnoreCase("Clothing")) {
-                        retailer1.setText("Clothes");
+//                    SavingsDisplayObject response = API.requestSavings(2);
+                    if (text.equalsIgnoreCase("Clothing")){
+                        retailer1.setText("ZARA");
+                        sale1.setText("40%");
+                        confidence1.setText("30%");
+                        weeks1.setText("1 Week");
+
+//                        retailer1.setText(response.clothing.get(0).retailerName);
+//                        sale1.setText(response.clothing.get(0).weeksFromNow);
+//                        sale1.setText(response.clothing.get(0).percentBelowAvg);
+
+//                        retailer1.setText(response.clothing.get(1).retailerName);
+//                        sale1.setText(response.clothing.get(1).weeksFromNow);
+//                        sale1.setText(response.clothing.get(1).percentBelowAvg);
+
+//                        retailer1.setText(response.clothing.get(2).retailerName);
+//                        sale1.setText(response.clothing.get(2).weeksFromNow);
+//                        sale1.setText(response.clothing.get(2).percentBelowAvg);
                     }
-                    else if (text.equalsIgnoreCase("Food")){
-                        retailer1.setText("FUUUUD");
-                    }
-                    else if (text.equalsIgnoreCase("Food")){
-                        retailer1.setText("FUUUUD");
-                    }
-                    else if (text.equalsIgnoreCase("Food")){
-                        retailer1.setText("FUUUUD");
-                    }
-                    else{
-                        retailer1.setText("FUUUUD");
-                    }
+//                    else if (text.equalsIgnoreCase("Food")){
+//                        retailer1.setText(response.groceries.get(0).retailerName);
+//                        sale1.setText(response.clothing.get(0).weeksFromNow);
+//                        sale1.setText(response.clothing.get(0).percentBelowAvg);
 
+//                        retailer1.setText(response.clothing.get(1).retailerName);
+//                        sale1.setText(response.clothing.get(1).weeksFromNow);
+//                        sale1.setText(response.clothing.get(1).percentBelowAvg);
 
+//                        retailer1.setText(response.clothing.get(2).retailerName);
+//                        sale1.setText(response.clothing.get(2).weeksFromNow);
+//                        sale1.setText(response.clothing.get(2).percentBelowAvg);
+//                    }
+//                    else if (text.equalsIgnoreCase("Dining")){
+//                        retailer1.setText(response.dining.get(0).retailerName);
+//                        sale1.setText(response.clothing.get(0).weeksFromNow);
+//                        sale1.setText(response.clothing.get(0).percentBelowAvg);
 
+//                        retailer1.setText(response.clothing.get(1).retailerName);
+//                        sale1.setText(response.clothing.get(1).weeksFromNow);
+//                        sale1.setText(response.clothing.get(1).percentBelowAvg);
 
+//                        retailer1.setText(response.clothing.get(2).retailerName);
+//                        sale1.setText(response.clothing.get(2).weeksFromNow);
+//                        sale1.setText(response.clothing.get(2).percentBelowAvg);
+//                    }
+//                    else {
+//                        retailer1.setText(response.other.get(0).retailerName);
+//                        sale1.setText(response.clothing.get(0).weeksFromNow);
+//                        sale1.setText(response.clothing.get(0).percentBelowAvg);
 
+//                        retailer1.setText(response.clothing.get(1).retailerName);
+//                        sale1.setText(response.clothing.get(1).weeksFromNow);
+//                        sale1.setText(response.clothing.get(1).percentBelowAvg);
 
-
+//                        retailer1.setText(response.clothing.get(2).retailerName);
+//                        sale1.setText(response.clothing.get(2).weeksFromNow);
+//                        sale1.setText(response.clothing.get(2).percentBelowAvg);
+//                    }
 
                 }
 
@@ -120,43 +164,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.nav_share) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-
-
-        if (id == R.id.nav_gallery) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
